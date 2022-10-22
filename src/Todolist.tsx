@@ -1,4 +1,5 @@
 import React, {FC} from 'react';
+import {FilterValuesType} from "./App";
 
 type TasksPropsType = {
     id: number
@@ -10,12 +11,10 @@ type TodolistPropsType = {
     title: string
     tasks: Array<TasksPropsType>
     removeTask: (id: number)=> void
-    changeFilter: (value: 'all' | 'active' | 'completed') => void
+    changeFilter: (value: FilterValuesType) => void
 }
 
 const Todolist: FC<TodolistPropsType> = ({title, tasks, removeTask, changeFilter}) => {
-
-
 
     return (
         <div>
@@ -35,7 +34,6 @@ const Todolist: FC<TodolistPropsType> = ({title, tasks, removeTask, changeFilter
                             </li>
                         )}
                 )}
-
 
             </ul>
             <div>

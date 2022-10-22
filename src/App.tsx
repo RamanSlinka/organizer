@@ -2,8 +2,10 @@ import React, {useState} from 'react';
 import './App.css';
 import Todolist from "./Todolist";
 
+export type FilterValuesType = 'all' | 'active' | 'completed'
+
 function App() {
-    let [filter, setFilter] = useState<'all'| 'active' | 'completed' >('all')
+    let [filter, setFilter] = useState<FilterValuesType >('all')
     let [tasks, setTasks] = useState([
         {id: 1, title: "HTML&CSS", isDone: true},
         {id: 2, title: "JS", isDone: true},
@@ -27,7 +29,7 @@ function App() {
         taskForTodolist = tasks.filter(task => task.isDone === true )
     }
 
-    const changeFilter = (value: 'all' | 'active' | 'completed'  ) => {
+    const changeFilter = (value: FilterValuesType ) => {
       setFilter(value)
     }
 
@@ -38,7 +40,7 @@ function App() {
                       removeTask={removeTask}
                       changeFilter={changeFilter}
             />
-            {/*<Todolist title="Songs" tasks={tasks2}/>*/}
+
 
         </div>
     );
