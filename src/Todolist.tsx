@@ -14,9 +14,14 @@ type TodolistPropsType = {
     removeTask: (id: string) => void
     changeFilter: (value: FilterValuesType) => void
     addTasks: (title: string) => void
+    changeTaskStatus: (id: string, isDone: boolean) => void
 }
 
-const Todolist: FC<TodolistPropsType> = ({title, tasks, removeTask, changeFilter, addTasks}) => {
+const Todolist: FC<TodolistPropsType> = ({
+                                             title, tasks,
+                                             removeTask, changeFilter,
+                                             addTasks, changeTaskStatus
+                                         }) => {
     let [newTitle, setNewTitle] = useState('')
 
     const addTaskHandler = () => {
@@ -57,12 +62,21 @@ const Todolist: FC<TodolistPropsType> = ({title, tasks, removeTask, changeFilter
             </div>
             <ul>
                 {tasks.map((task) => {
-
+                        const onClickHandler = () => {
+                            removeTask(task.id)
+                        }
+                        const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+                            let newIsDoneValue = e.currentTarget.checked
+                            changeTaskStatus(task.id, newIsDoneValue)
+                        }
                         return (
                             <li key={task.id}>
-                                <input type="checkbox" checked={task.isDone}/>
+                                <input type="checkbox"
+                                       checked={task.isDone}
+                                       onChange={onChangeHandler}
+                                />
                                 <span>{task.title}</span>
-                                <button onClick={() => removeTask(task.id)}>✖</button>
+                                <button onClick={onClickHandler}>✖</button>
                             </li>
                         )
                     }
@@ -70,7 +84,7 @@ const Todolist: FC<TodolistPropsType> = ({title, tasks, removeTask, changeFilter
 
             </ul>
             <div>
-                <button onClick={onAddClickHandler }>All</button>
+                <button onClick={onAddClickHandler}>All</button>
                 <button onClick={onActiveClickHandler}>Active</button>
                 <button onClick={onCompletedClickHandler}>Completed</button>
             </div>
