@@ -22,11 +22,16 @@ const Todolist: FC<TodolistPropsType> = ({
                                              removeTask, changeFilter,
                                              addTasks, changeTaskStatus
                                          }) => {
-    let [newTitle, setNewTitle] = useState('')
+    const [newTitle, setNewTitle] = useState('')
+    const [error, setError] = useState<string | null>(null)
 
     const addTaskHandler = () => {
-        addTasks(newTitle)
-        setNewTitle('')
+        if (newTitle.trim() !== '') {
+            addTasks(newTitle.trim())
+            setNewTitle('')
+        } else {
+            setError('Title is required')
+        }
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,6 +39,7 @@ const Todolist: FC<TodolistPropsType> = ({
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+      setError(null)
         if (e.key === 'Enter') {
             addTaskHandler()
         }
@@ -59,6 +65,7 @@ const Todolist: FC<TodolistPropsType> = ({
 
                 />
                 <button onClick={addTaskHandler}>+</button>
+                {error &&  <div className='error-message'>{error}</div>}
             </div>
             <ul>
                 {tasks.map((task) => {
@@ -77,6 +84,7 @@ const Todolist: FC<TodolistPropsType> = ({
                                 />
                                 <span>{task.title}</span>
                                 <button onClick={onClickHandler}>✖</button>
+
                             </li>
                         )
                     }
