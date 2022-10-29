@@ -15,12 +15,14 @@ type TodolistPropsType = {
     changeFilter: (value: FilterValuesType) => void
     addTasks: (title: string) => void
     changeTaskStatus: (id: string, isDone: boolean) => void
+    filter: FilterValuesType
 }
 
 const Todolist: FC<TodolistPropsType> = ({
                                              title, tasks,
                                              removeTask, changeFilter,
-                                             addTasks, changeTaskStatus
+                                             addTasks, changeTaskStatus,
+                                             filter
                                          }) => {
     const [newTitle, setNewTitle] = useState('')
     const [error, setError] = useState<string | null>(null)
@@ -39,7 +41,7 @@ const Todolist: FC<TodolistPropsType> = ({
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-      setError(null)
+        setError(null)
         if (e.key === 'Enter') {
             addTaskHandler()
         }
@@ -65,7 +67,7 @@ const Todolist: FC<TodolistPropsType> = ({
 
                 />
                 <button onClick={addTaskHandler}>+</button>
-                {error &&  <div className='error-message'>{error}</div>}
+                {error && <div className='error-message'>{error}</div>}
             </div>
             <ul>
                 {tasks.map((task) => {
@@ -77,7 +79,9 @@ const Todolist: FC<TodolistPropsType> = ({
                             changeTaskStatus(task.id, newIsDoneValue)
                         }
                         return (
-                            <li key={task.id}>
+                            <li key={task.id}
+                            className={task.isDone ? 'is-done' : ''}
+                            >
                                 <input type="checkbox"
                                        checked={task.isDone}
                                        onChange={onChangeHandler}
@@ -92,9 +96,16 @@ const Todolist: FC<TodolistPropsType> = ({
 
             </ul>
             <div>
-                <button onClick={onAddClickHandler}>All</button>
-                <button onClick={onActiveClickHandler}>Active</button>
-                <button onClick={onCompletedClickHandler}>Completed</button>
+                <button
+                    className={filter === 'all' ? 'active-filter' : ''}
+                    onClick={onAddClickHandler}>All
+                </button>
+                <button
+                    className={filter === 'active' ? 'active-filter' : ''}
+                    onClick={onActiveClickHandler}>Active</button>
+                <button
+                    className={filter === 'completed' ? 'active-filter' : ''}
+                    onClick={onCompletedClickHandler}>Completed</button>
             </div>
         </div>
     );
