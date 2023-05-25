@@ -5,8 +5,7 @@ import {DataHandlerService} from "../../services/data-handler.service";
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
-  styleUrls: ['./tasks.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit {
   public tasks: Task[] | undefined;
@@ -15,6 +14,6 @@ export class TasksComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tasks = this._dataHandler.getTasks()
+     this._dataHandler.taskSubject.subscribe(tasks => this.tasks = tasks)
   }
 }

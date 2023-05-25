@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {DataHandlerService} from "../../services/data-handler.service";
 import {Category} from "../../models/category.model";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-categories',
@@ -15,6 +16,10 @@ export class CategoriesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.categories = this._dataHandler.getCategories()
+     this._dataHandler.categoriesSubject.subscribe(categories => this.categories = categories)
+  }
+
+public showTaskByCategory(category: Category) {
+    this._dataHandler.fillTasksByCategory(category)
   }
 }
