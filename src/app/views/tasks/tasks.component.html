@@ -1,0 +1,58 @@
+
+  <div class="card  mx-3">
+    <div class="card-header pb-0">
+      <div class="row">
+        <div class="col-lg-6 col-7">
+          <h6>Task list </h6>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card-body px-0 pb-2">
+      <div class="table-responsive">
+        <table class="table align-items-center mb-0">
+          <thead>
+          <tr >
+            <th class="text-end text-uppercase  text-xxs font-weight-bolder opacity-7">ID</th>
+            <th class="text-start text-uppercase  text-xxs font-weight-bolder opacity-7">Title</th>
+            <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Category</th>
+            <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">
+              Priority
+            </th>
+            <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Status</th>
+            <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Date</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr *ngFor="let task of tasks">
+            <td>
+              <div class="d-flex px-2 ">
+                  <img src="../assets/img/small-logos/logo-jira.svg" class="avatar avatar-sm me-3" alt="xz">
+
+                <div class="d-flex flex-column justify-content-center">
+                  <p class="mb-0 text-sm">{{task.id}}</p>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div class="avatar-group mt-2"> {{task.title}}  </div>
+            </td>
+
+            <td class="align-middle text-center text-sm">
+              <span class="text-xs font-weight-bold"> $14,000 </span>
+            </td>
+
+            <td class="align-middle">
+            </td>
+
+          </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
