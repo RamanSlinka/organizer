@@ -49,7 +49,14 @@
             <td class="align-middle">{{task.priority != null ? task.priority.title : 'Without priority'}}
             </td>
             <td class="align-middle">{{task.date != null ? (task.date | date ) : 'Without date'}}</td>
-            <td class="align-middle">{{task.completed}} </td>
+            <td class="align-middle">
+
+                 <img  *ngIf="task.completed" src="../assets/img/logos/true.png" class="avatar avatar-sm me-3 mx-lg-3" alt="xz">
+                 <img  *ngIf="!task.completed" src="../assets/img/logos/false.jpg" class="avatar avatar-sm me-3 mx-lg-3" alt="xz">
+
+
+
+            </td>
 
           </tr>
 
