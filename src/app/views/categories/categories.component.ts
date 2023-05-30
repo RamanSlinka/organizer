@@ -11,6 +11,7 @@ import {Subject} from "rxjs";
 })
 export class CategoriesComponent implements OnInit {
   public categories: Category[] | undefined;
+  public selectedCategory  : Category | null = null;
 
   constructor(private _dataHandler: DataHandlerService) {
   }
@@ -20,6 +21,7 @@ export class CategoriesComponent implements OnInit {
   }
 
 public showTaskByCategory(category: Category) {
+    this.selectedCategory = category;
     this._dataHandler.fillTasksByCategory(category)
   }
 }

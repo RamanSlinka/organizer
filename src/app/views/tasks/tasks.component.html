@@ -14,25 +14,26 @@
         <table class="table align-items-center mb-0">
           <thead>
           <tr >
-            <th class="text-end text-uppercase  text-xxs font-weight-bolder opacity-7">ID</th>
+            <th class="text-end text-uppercase  text-xxs font-weight-bolder opacity-7">№</th>
             <th class="text-start text-uppercase  text-xxs font-weight-bolder opacity-7">Title</th>
             <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Category</th>
             <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">
               Priority
             </th>
-            <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Status</th>
+
             <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Date</th>
+            <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Status</th>
           </tr>
           </thead>
 
           <tbody>
-          <tr *ngFor="let task of tasks ">
+          <tr *ngFor="let task of tasks; let i = index ">
             <td>
               <div class="d-flex px-2 ">
                   <img src="../assets/img/small-logos/logo-jira.svg" class="avatar avatar-sm me-3" alt="xz">
 
                 <div class="d-flex flex-column justify-content-center">
-                  <p class="mb-0 text-sm">{{task.id}}</p>
+                  <p class="mb-0 text-sm">{{i + 1}}</p>
                 </div>
               </div>
             </td>
@@ -42,11 +43,13 @@
             </td>
 
             <td class="align-middle text-center text-sm">
-              <span class="text-xs font-weight-bold"> {{task.category?.title}} </span>
+              <span class="text-xs font-weight-bold"> {{task.category != null ? task.category.title : 'Without category'}} </span>
             </td>
 
-            <td class="align-middle">
+            <td class="align-middle">{{task.priority != null ? task.priority.title : 'Without priority'}}
             </td>
+            <td class="align-middle">{{task.date != null ? (task.date | date ) : 'Without date'}}</td>
+            <td class="align-middle">{{task.completed}} </td>
 
           </tr>
 
